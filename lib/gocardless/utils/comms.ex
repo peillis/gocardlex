@@ -1,7 +1,7 @@
 defmodule Gocardless.Utils.Comms do
-  @api_base Application.fetch_env!(:gocardless, :api_base)
-  @api_version Application.fetch_env!(:gocardless, :api_version)
-  @access_token Application.fetch_env!(:gocardless, :access_token)
+  @api_base Application.compile_env!(:gocardless, :api_base)
+  @api_version Application.compile_env!(:gocardless, :api_version)
+  @access_token Application.compile_env!(:gocardless, :access_token)
 
   def request(:get, path) do
     path

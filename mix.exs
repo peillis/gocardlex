@@ -32,7 +32,7 @@ defmodule Gocardless.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:ex_doc, "~> 0.37", only: :dev},
-     {:httpotion, "~> 3.2.0"},
+     {:httpotion, "~> 3.1.0"},
      {:poison, "~> 6.0"},
      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}]
   end
