@@ -3,7 +3,7 @@ defmodule Gocardless.Mixfile do
 
   def project do
     [app: :gocardless,
-     version: "1.0.3",
+     version: "1.0.4",
      description: "Elixir wrapper for the GoCardless API",
      package: package(),
      elixir: "~> 1.15",
