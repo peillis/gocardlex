@@ -6,52 +6,49 @@ defmodule Gocardless.Utils.Comms do
   def request(:get, path) do
     path
     |> api_url
-    |> HTTPotion.get(headers())
+    |> then(&Tesla.get(client(), &1))
+    |> get_response
   end
 
   def request(:post, path, body) do
-    hdrs = [body: Poison.encode!(body)]
-    |> headers
-
     path
     |> api_url
-    |> HTTPotion.post(hdrs)
+    |> then(&Tesla.post(client(), &1, body))
+    |> get_response
   end
 
   def request(:put, path, body) do
-    hdrs = [body: Poison.encode!(body)]
-    |> headers
-
     path
     |> api_url
-    |> HTTPotion.put(hdrs)
+    |> then(&Tesla.put(client(), &1, body))
+    |> get_response
   end
 
-  def decode_json(resp_map) do
-    case resp_map.body do
-      "" -> {:ok, "No Body"}
-      body -> Poison.decode(body)
-    end
-    |> create_response(resp_map)
- end
-
-  defp create_response({:ok, body}, resp_map) do
-    case resp_map.status_code do
-      x when x in [200, 201, 204] -> {:ok, body}
-      _ -> {:error, body}
+  defp get_response({:ok, resp}) do
+    case resp.status do
+      x when x in [200, 201, 204] -> {:ok, resp.body}
+      _ -> {:error, resp.body}
     end
   end
-  defp create_response({:error, _}, _), do: {:error, "There was an issue decoding the body"}
+
+  defp get_response({:error, err}), do: {:error, err}
 
   defp api_url(url) do
     @api_base <> url
   end
 
-  defp headers, do: headers([])
-  defp headers(body) do
-    [headers: ["Authorization": "Bearer #{@access_token}",
-               "GoCardless-Version": @api_version,
-               "Accepts": "application/json",
-               "Content-Type": "application/json"]] ++ body
+  defp client() do
+    Tesla.client([
+      {Tesla.Middleware.BaseUrl, @api_base},
+      {Tesla.Middleware.BearerAuth, token: @access_token},
+      {Tesla.Middleware.Headers, [
+        {"user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
+        {"authorization", "Bearer #{@access_token}"},
+        {"gocardless-version", @api_version},
+        {"accepts", "application/json"},
+        {"content-type", "application/json"}
+      ]},
+      Tesla.Middleware.JSON
+    ])
   end
 end

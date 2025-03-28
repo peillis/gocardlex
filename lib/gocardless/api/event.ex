@@ -11,12 +11,10 @@ defmodule Gocardless.Api.Event do
 
     :get
     |> request("/events?#{url_params}")
-    |> decode_json
   end
 
   def get(event_id) do
     :get
     |> request("/events/#{event_id}")
-    |> decode_json
   end
 end

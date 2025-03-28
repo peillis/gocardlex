@@ -11,12 +11,10 @@ defmodule Gocardless.Api.Payout do
 
     :get
     |> request("/payouts?#{url_params}")
-    |> decode_json
   end
 
   def get(payout_id) do
     :get
     |> request("/payouts/#{payout_id}")
-    |> decode_json
   end
 end
