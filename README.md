@@ -1,16 +1,14 @@
-# Gocardless
-
-[![Hex pm](http://img.shields.io/hexpm/v/gocardless.svg?style=flat)](https://hex.pm/packages/gocardless)
+# Gocardlex
 
 Elixir wrapper for the GoCardless API.
 
 ## Installation
 
-1. Add `gocardless` to your list of dependencies in mix.exs:
+1. Add `gocardlex` to your list of dependencies in mix.exs:
 
 ```elixir
 def deps do
-  [{:gocardless, "~> 1.0.3"}]
+  [{:gocardlex, "~> x.x.x"}]
 end
 ```
 
@@ -21,18 +19,18 @@ mix deps.get
 ```
 
 
-2. Ensure `gocardless` is started before your application:
+2. Ensure `gocardlex` is started before your application:
 
 ```elixir
 def application do
-  [applications: [:gocardless]]
+  [applications: [:gocardlex]]
 end
 ```
 
 3. Add configuration to your app:
 
 ```elixir
-config :gocardless,
+config :gocardlex,
   api_base: "https://api-sandbox.gocardless.com/",
   api_version: "2015-07-06",
   access_token: "<your-token>"
@@ -49,7 +47,7 @@ iex> params = %{
     country_code: "GB"
   }
 }
-iex> Gocardless.Client.create_customer(params)
+iex> Gocardlex.Client.create_customer(params)
 {:ok,
   %{"customers" => %{"address_line1" => nil, "address_line2" => nil,
       "address_line3" => nil, "city" => nil, "company_name" => nil,
@@ -62,7 +60,7 @@ iex> Gocardless.Client.create_customer(params)
 
 ## For more information, see the Hex docs
 
-You can read the docs [here](https://hexdocs.pm/gocardless)
+You can read the docs [here](https://hexdocs.pm/gocardlex)
 
 ## Development Setup
 
@@ -96,4 +94,4 @@ Areas of the codebase that can be improved.
 
 ## License
 
-The `gocardless` lib is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+The `gocardlex` lib is released under the [MIT License](http://www.opensource.org/licenses/MIT).

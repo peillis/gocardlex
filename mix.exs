@@ -1,15 +1,16 @@
-defmodule Gocardless.Mixfile do
+defmodule Gocardlex.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :gocardless,
-     version: "1.0.4",
-     description: "Elixir wrapper for the GoCardless API",
-     package: package(),
-     elixir: "~> 1.15",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :gocardlex,
+      version: "1.0.4",
+      package: package(),
+      elixir: "~> 1.15",
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -17,8 +18,10 @@ defmodule Gocardless.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger],
-     mod: {Gocardless, []}]
+    [
+      extra_applications: [:logger],
+      mod: {Gocardlex, []}
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -31,17 +34,20 @@ defmodule Gocardless.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:ex_doc, "~> 0.37", only: :dev},
-     {:jason, "~> 1.4"},
-     {:tesla, "~> 1.14"},
-     {:credo, "~> 1.7", only: [:dev, :test], runtime: false}]
+    [
+      {:ex_doc, "~> 0.37", only: :dev},
+      {:jason, "~> 1.4"},
+      {:tesla, "~> 1.14"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
+    ]
   end
 
   defp package do
     [
-      maintainers: ["overture8", "tosbourn"],
+      maintainers: ["peillis"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/PiggyPot/gocardless"}
+      description: "Elixir wrapper for the GoCardless API",
+      links: %{"GitHub" => "https://github.com/peillis/gocardlex"}
     ]
   end
 end
