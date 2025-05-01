@@ -1,10 +1,10 @@
-defmodule Gocardless.Api.RedirectFlow do
+defmodule Gocardlex.Api.RedirectFlow do
   @moduledoc """
   Functions that map to Redirect Flow endpoints
 
-  Talks to our `Gocardless.Utils.Comms` to do the requests
+  Talks to our `Gocardlex.Utils.Comms` to do the requests
   """
-  import Gocardless.Utils.Comms
+  import Gocardlex.Utils.Comms
 
   def get(redirect_flow_id) do
     :get

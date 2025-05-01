@@ -2,7 +2,7 @@ defmodule SubscriptionTest do
   use ExUnit.Case
 
   test "list_subscriptions returns response formated as required" do
-    {:ok, %{"subscriptions" => subscriptions}} = Gocardless.Client.list_subscriptions
+    {:ok, %{"subscriptions" => subscriptions}} = Gocardlex.Client.list_subscriptions
     assert is_list(subscriptions)
   end
 
@@ -20,7 +20,7 @@ defmodule SubscriptionTest do
       }
     }
 
-    {:ok, %{"subscriptions" => new_subscription}} = Gocardless.Client.create_subscription(params)
+    {:ok, %{"subscriptions" => new_subscription}} = Gocardlex.Client.create_subscription(params)
     assert new_subscription["name"] == "Test Subscription"
   end
 
@@ -38,19 +38,19 @@ defmodule SubscriptionTest do
       }
     }
 
-    {:ok, %{"subscriptions" => new_subscription}} = Gocardless.Client.create_subscription(params)
+    {:ok, %{"subscriptions" => new_subscription}} = Gocardlex.Client.create_subscription(params)
     params = %{
       subscriptions: %{name: "Updated subscription"}
     }
 
-    {:ok, %{"subscriptions" => updated_subscription}} = Gocardless.Client.update_subscription(new_subscription["id"], params)
+    {:ok, %{"subscriptions" => updated_subscription}} = Gocardlex.Client.update_subscription(new_subscription["id"], params)
 
     assert updated_subscription["name"] == "Updated subscription"
   end
 
   test "get_subscription returns a subscription" do
     subscription_id = get_last_subscription_id()
-    {:ok, %{"subscriptions" => subscription}} = Gocardless.Client.get_subscription(subscription_id)
+    {:ok, %{"subscriptions" => subscription}} = Gocardlex.Client.get_subscription(subscription_id)
     assert subscription["id"] == subscription_id
   end
 
@@ -68,14 +68,14 @@ defmodule SubscriptionTest do
       }
     }
 
-    {:ok, %{"subscriptions" => new_subscription}} = Gocardless.Client.create_subscription(params)
-    {:ok, %{"subscriptions" => cancelled_subscription}} = Gocardless.Client.cancel_subscription(new_subscription["id"])
+    {:ok, %{"subscriptions" => new_subscription}} = Gocardlex.Client.create_subscription(params)
+    {:ok, %{"subscriptions" => cancelled_subscription}} = Gocardlex.Client.cancel_subscription(new_subscription["id"])
 
     assert cancelled_subscription["status"] == "cancelled"
   end
 
   defp get_last_subscription_id do
-    {:ok, %{"subscriptions" => subscriptions}} = Gocardless.Client.list_subscriptions(%{limit: 1})
+    {:ok, %{"subscriptions" => subscriptions}} = Gocardlex.Client.list_subscriptions(%{limit: 1})
 
     {:ok, subscription} = Enum.fetch(subscriptions, -1)
 
@@ -86,7 +86,7 @@ defmodule SubscriptionTest do
     params = %{
       creditors: %{name: "Test Creditor"}
     }
-    {:ok, %{"creditors" => new_creditor}} = Gocardless.Client.create_creditor(params)
+    {:ok, %{"creditors" => new_creditor}} = Gocardlex.Client.create_creditor(params)
 
     params = %{
       customers: %{
@@ -97,7 +97,7 @@ defmodule SubscriptionTest do
       }
     }
 
-    {:ok, %{"customers" => new_customer}} = Gocardless.Client.create_customer(params)
+    {:ok, %{"customers" => new_customer}} = Gocardlex.Client.create_customer(params)
 
     params = %{
       customer_bank_accounts: %{
@@ -109,7 +109,7 @@ defmodule SubscriptionTest do
       }
     }
 
-    {:ok, %{"customer_bank_accounts" => new_customer_bank_account}} = Gocardless.Client.create_customer_bank_account(params)
+    {:ok, %{"customer_bank_accounts" => new_customer_bank_account}} = Gocardlex.Client.create_customer_bank_account(params)
 
     params = %{
       mandates: %{
@@ -117,7 +117,7 @@ defmodule SubscriptionTest do
         links: %{customer_bank_account: new_customer_bank_account["id"], creditor: new_creditor["id"]}
       }
     }
-    {:ok, %{"mandates" => new_mandate}} = Gocardless.Client.create_mandate(params)
+    {:ok, %{"mandates" => new_mandate}} = Gocardlex.Client.create_mandate(params)
     new_mandate
   end
 end

@@ -1,4 +1,4 @@
-defmodule Gocardless.Behaviour.Payout do
+defmodule Gocardlex.Behaviour.Payout do
   @moduledoc """
   Defines the behaviour for Payouts, you cannot create or edit Payouts, only view them.
   """
@@ -7,7 +7,7 @@ defmodule Gocardless.Behaviour.Payout do
 
   ## Examples
 
-      iex> Gocardless.Client.list_payouts
+      iex> Gocardlex.Client.list_payouts
       {:ok,
        %{"meta" => %{"cursors" => %{"after" => nil, "before" => nil}, "limit" => 50},
          "payouts" => [%{"amount" => 9900, "arrival_date" => "2017-06-27",
@@ -25,7 +25,7 @@ defmodule Gocardless.Behaviour.Payout do
 
   ## Examples
 
-      iex> Gocardless.Client.get_payout("PO000099999999")
+      iex> Gocardlex.Client.get_payout("PO000099999999")
       {:ok,
        %{"payouts" => %{"amount" => 9900, "arrival_date" => "2017-06-27",
            "created_at" => "2017-06-27T09:51:33.167Z", "currency" => "GBP",

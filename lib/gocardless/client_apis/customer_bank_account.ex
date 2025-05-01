@@ -1,8 +1,8 @@
-defmodule Gocardless.ClientApi.CustomerBankAccount do
+defmodule Gocardlex.ClientApi.CustomerBankAccount do
   defmacro __using__(_) do
     quote do
-      alias Gocardless.Api.CustomerBankAccount
-      @behaviour Gocardless.Behaviour.CustomerBankAccount
+      alias Gocardlex.Api.CustomerBankAccount
+      @behaviour Gocardlex.Behaviour.CustomerBankAccount
 
       # CustomerBankAccount API
       def list_customer_bank_accounts(params \\ %{}) do

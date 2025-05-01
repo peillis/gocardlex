@@ -1,10 +1,10 @@
-defmodule Gocardless.Behaviour.Creditor do
+defmodule Gocardlex.Behaviour.Creditor do
   @moduledoc """
   Lists Creditors from GoCardless
 
   ## Examples
 
-  iex> Gocardless.Client.list_creditors
+  iex> Gocardlex.Client.list_creditors
       {:ok, %{"creditors" => [%{"address_line1" => nil, "address_line2" => nil, "address_line3" => nil,
        "city" => nil, "country_code" => nil,
        "created_at" => "2017-06-27T08:52:52.655Z", "id" => "CR000099999999",
@@ -25,7 +25,7 @@ defmodule Gocardless.Behaviour.Creditor do
   Gets a Creditor based on their ID in GoCardless
 
   ## Examples
-      iex> Gocardless.Client.get_creditor("CR000099999999")
+      iex> Gocardlex.Client.get_creditor("CR000099999999")
       {:ok, %{"address_line1" => nil, "address_line2" => nil, "address_line3" => nil,
        "city" => nil, "country_code" => nil,
        "created_at" => "2017-06-27T08:52:52.655Z", "id" => "CR000099999999",
@@ -51,7 +51,7 @@ defmodule Gocardless.Behaviour.Creditor do
           name: "Test Creditor"
         }
       }
-      iex> Gocardless.Client.create_creditor(params)
+      iex> Gocardlex.Client.create_creditor(params)
       {:ok, %{"address_line1" => nil, "address_line2" => nil, "address_line3" => nil,
        "city" => nil, "country_code" => nil,
        "created_at" => "2017-06-27T08:52:52.655Z", "id" => "CR000099999999",
@@ -77,7 +77,7 @@ defmodule Gocardless.Behaviour.Creditor do
           name: "Updated Creditor"
         }
       }
-      iex> Gocardless.Client.update_creditor("CR000099999999", params)
+      iex> Gocardlex.Client.update_creditor("CR000099999999", params)
       {:ok, %{"address_line1" => nil, "address_line2" => nil, "address_line3" => nil,
        "city" => nil, "country_code" => nil,
        "created_at" => "2017-06-27T08:52:52.655Z", "id" => "CR000099999999",

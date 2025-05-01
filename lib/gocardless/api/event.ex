@@ -1,10 +1,10 @@
-defmodule Gocardless.Api.Event do
+defmodule Gocardlex.Api.Event do
   @moduledoc """
   Functions that map to Event endpoints
 
-  Talks to our `Gocardless.Utils.Comms` to do the requests
+  Talks to our `Gocardlex.Utils.Comms` to do the requests
   """
-  import Gocardless.Utils.Comms
+  import Gocardlex.Utils.Comms
 
   def list(params) do
     url_params = URI.encode_query(params)

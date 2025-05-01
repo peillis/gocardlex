@@ -1,4 +1,4 @@
-defmodule Gocardless.Behaviour.Mandate do
+defmodule Gocardlex.Behaviour.Mandate do
   @moduledoc """
   Public Mandate API for Gocardless
   """
@@ -7,7 +7,7 @@ defmodule Gocardless.Behaviour.Mandate do
   Lists mandates from GoCardless
 
   ## Examples
-      iex> Gocardless.Client.list_mandates()
+      iex> Gocardlex.Client.list_mandates()
       {:ok,
        %{"mandates" => [%{"created_at" => "2017-06-23T15:31:52.850Z",
             "id" => "MD000999999998",
@@ -33,7 +33,7 @@ defmodule Gocardless.Behaviour.Mandate do
             "scheme" => "bacs", "status" => "pending_submission"}],
          "meta" => %{"cursors" => %{"after" => nil, "before" => nil}, "limit" => 50}}}
 
-      iex> Gocardless.Client.list_mandates(%{customer: "CU000999999999"})
+      iex> Gocardlex.Client.list_mandates(%{customer: "CU000999999999"})
       {:ok,
        %{"mandates" => [%{"created_at" => "2017-06-23T15:31:52.850Z",
             "id" => "MD000999999999",
@@ -52,7 +52,7 @@ defmodule Gocardless.Behaviour.Mandate do
 
   ## Examples
 
-      iex> Gocardless.Client.get_mandate("MD000999999998")
+      iex> Gocardlex.Client.get_mandate("MD000999999998")
       {:ok,
        %{"mandates" => %{"created_at" => "2017-06-23T15:29:20.872Z",
            "id" => "MD000999999998",
@@ -74,7 +74,7 @@ defmodule Gocardless.Behaviour.Mandate do
         scheme: "bacs",
         links: %{customer_bank_account: "BA000999999999"}
       }
-      iex> Gocardless.Client.create_mandate(%{mandates: params})
+      iex> Gocardlex.Client.create_mandate(%{mandates: params})
       {:ok,
        %{"mandates" => %{"created_at" => "2017-06-23T15:29:20.872Z",
            "id" => "MD000999999999",
@@ -99,7 +99,7 @@ defmodule Gocardless.Behaviour.Mandate do
           }
         }
       }
-      iex> Gocardless.Client.update_mandate("MD000999999999", params)
+      iex> Gocardlex.Client.update_mandate("MD000999999999", params)
       {:ok,
        %{"mandates" => %{"created_at" => "2017-06-23T15:31:52.850Z",
            "id" => "MD000999999999",
@@ -118,7 +118,7 @@ defmodule Gocardless.Behaviour.Mandate do
 
   ## Examples
 
-      iex> Gocardless.Client.cancel_mandate("MD000999999999")
+      iex> Gocardlex.Client.cancel_mandate("MD000999999999")
       {:ok,
        %{"mandates" => %{"created_at" => "2017-06-23T15:31:52.850Z",
            "id" => "MD000999999999",
@@ -136,7 +136,7 @@ defmodule Gocardless.Behaviour.Mandate do
 
   ## Examples
 
-      iex> Gocardless.Client.reinstate_mandate("MD000999999999")
+      iex> Gocardlex.Client.reinstate_mandate("MD000999999999")
       {:ok,
        %{"mandates" => %{"created_at" => "2017-06-23T15:31:52.850Z",
            "id" => "MD000999999999",
@@ -158,7 +158,7 @@ defmodule Gocardless.Behaviour.Mandate do
       iex> params = %{
         links: %{mandate: "MD123"}
       }
-      iex> Gocardless.Client.pdf_preview(%{params: params})
+      iex> Gocardlex.Client.pdf_preview(%{params: params})
       {:ok, %{
         "mandate_pdfs" => %{
           "url" => "https://mandate-previews.gocardless.com/?token=lhulxcPEbT9v3W0QUpBOxhlGUSYEayQQ4VVrpO7YnUKRYynP5",

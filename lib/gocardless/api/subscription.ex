@@ -1,10 +1,10 @@
-defmodule Gocardless.Api.Subscription do
+defmodule Gocardlex.Api.Subscription do
   @moduledoc """
   Functions that map to Subscription endpoints
 
-  Talks to our `Gocardless.Utils.Comms` to do the requests
+  Talks to our `Gocardlex.Utils.Comms` to do the requests
   """
-  import Gocardless.Utils.Comms
+  import Gocardlex.Utils.Comms
 
   def list(params) do
     url_params = URI.encode_query(params)

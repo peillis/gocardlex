@@ -1,9 +1,9 @@
-defmodule Gocardless.ClientApi.RedirectFlow do
+defmodule Gocardlex.ClientApi.RedirectFlow do
   @moduledoc false
   defmacro __using__(_) do
     quote do
-      alias Gocardless.Api.RedirectFlow
-      @behaviour Gocardless.Behaviour.RedirectFlow
+      alias Gocardlex.Api.RedirectFlow
+      @behaviour Gocardlex.Behaviour.RedirectFlow
 
       # RedirectFlow API
       def get_redirect_flow(redirect_flow_id) do

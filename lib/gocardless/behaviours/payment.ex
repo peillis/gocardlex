@@ -1,10 +1,10 @@
-defmodule Gocardless.Behaviour.Payment do
+defmodule Gocardlex.Behaviour.Payment do
   @doc """
   Lists all payments
 
   ## Examples
 
-      iex> Gocardless.Client.list_payments
+      iex> Gocardlex.Client.list_payments
       {:ok,
       %{"meta" => %{"cursors" => %{"after" => nil, "before" => nil}, "limit" => 50},
         "payments" => [%{"amount" => 100, "amount_refunded" => 0,
@@ -14,7 +14,7 @@ defmodule Gocardless.Behaviour.Payment do
               "mandate" => "MD000099999999"}, "metadata" => %{}, "reference" => nil,
             "status" => "pending_submission"}]}}
 
-      iex> Gocardless.Client.list_payments(%{"created_at[gt]" => "2017-06-22T17:18:06.000Z"})
+      iex> Gocardlex.Client.list_payments(%{"created_at[gt]" => "2017-06-22T17:18:06.000Z"})
       {:ok,
       %{"meta" => %{"cursors" => %{"after" => nil, "before" => nil}, "limit" => 50},
         "payments" => [%{"amount" => 100, "amount_refunded" => 0,
@@ -31,7 +31,7 @@ defmodule Gocardless.Behaviour.Payment do
 
   ## Examples
 
-      iex> Gocardless.Client.get_payment("PM000099999999")
+      iex> Gocardlex.Client.get_payment("PM000099999999")
       {:ok,
       %{"payments" => %{"amount" => 100, "amount_refunded" => 0,
           "charge_date" => "2017-06-30", "created_at" => "2017-06-23T15:27:18.656Z",
@@ -56,7 +56,7 @@ defmodule Gocardless.Behaviour.Payment do
           }
         }
       }
-      iex> Gocardless.Client.create_payment(params)
+      iex> Gocardlex.Client.create_payment(params)
       {:ok,
       %{"payments" => %{"amount" => 100, "amount_refunded" => 0,
           "charge_date" => "2017-06-30", "created_at" => "2017-06-23T15:27:18.656Z",
@@ -80,7 +80,7 @@ defmodule Gocardless.Behaviour.Payment do
           }
         }
       }
-      iex> Gocardless.Client.update_payment("PM000099999999", mtd)
+      iex> Gocardlex.Client.update_payment("PM000099999999", mtd)
       {:ok,
       %{"payments" => %{"amount" => 100, "amount_refunded" => 0,
           "charge_date" => "2017-06-30", "created_at" => "2017-06-23T15:27:18.656Z",
@@ -97,7 +97,7 @@ defmodule Gocardless.Behaviour.Payment do
 
   ## Examples
 
-      iex> Gocardless.Client.cancel_payment("PM000099999999")
+      iex> Gocardlex.Client.cancel_payment("PM000099999999")
       {:ok,
       %{"payments" => %{"amount" => 100, "amount_refunded" => 0,
           "charge_date" => "2017-06-30", "created_at" => "2017-06-23T15:27:18.656Z",
@@ -115,7 +115,7 @@ defmodule Gocardless.Behaviour.Payment do
 
   ## Examples
 
-      iex> Gocardless.Client.retry_payment("PM000099999999")
+      iex> Gocardlex.Client.retry_payment("PM000099999999")
   """
   @callback retry_payment(String.t, map()) :: tuple()
 end

@@ -1,11 +1,11 @@
-defmodule Gocardless.ClientApi.Event do
+defmodule Gocardlex.ClientApi.Event do
   @moduledoc """
   Creates our internal functions for Events that link to GenServer calls
   """
   defmacro __using__(_) do
     quote do
-      alias Gocardless.Api.Event
-      @behaviour Gocardless.Behaviour.Event
+      alias Gocardlex.Api.Event
+      @behaviour Gocardlex.Behaviour.Event
 
       # Event API
       def list_events(params \\ %{}) do

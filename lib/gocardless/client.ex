@@ -1,13 +1,13 @@
-defmodule Gocardless.Client do
+defmodule Gocardlex.Client do
   @moduledoc """
-  Starts up Gocardless Client
+  Starts up Gocardlex Client
 
-  Uses `Gocardless.ClientApi.Customer` and other client APIs
+  Uses `Gocardlex.ClientApi.Customer` and other client APIs
   from `/lib/client_apis/`
   """
-  @client_name Gocardless.Client
+  @client_name Gocardlex.Client
   use GenServer
-  use Gocardless.ClientApi.{
+  use Gocardlex.ClientApi.{
     Creditor,
     CreditorBankAccount,
     Customer,

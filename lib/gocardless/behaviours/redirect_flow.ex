@@ -1,4 +1,4 @@
-defmodule Gocardless.Behaviour.RedirectFlow do
+defmodule Gocardlex.Behaviour.RedirectFlow do
   @moduledoc """
   Defines the behaviour for Redirect Flows
   """
@@ -7,7 +7,7 @@ defmodule Gocardless.Behaviour.RedirectFlow do
 
   ## Examples
 
-      iex> Gocardless.Client.get_redirect_flow("RE000099999999999999999999999999")
+      iex> Gocardlex.Client.get_redirect_flow("RE000099999999999999999999999999")
       {:ok,
        %{"redirect_flows" => %{"created_at" => "2017-06-26T14:48:26.874Z",
            "description" => nil, "id" => "RE000099999999999999999999999999",
@@ -29,7 +29,7 @@ defmodule Gocardless.Behaviour.RedirectFlow do
           success_redirect_url: "https://mysite.com/redirect_path"
         }
       }
-      iex> Gocardless.Client.create_redirect_flow(params)
+      iex> Gocardlex.Client.create_redirect_flow(params)
       {:ok,
        %{"redirect_flows" => %{"created_at" => "2017-06-26T14:48:26.874Z",
            "description" => nil, "id" => "RE000099999999999999999999999999",
@@ -47,7 +47,7 @@ defmodule Gocardless.Behaviour.RedirectFlow do
   ## Examples
 
       iex> params = %{data: %{session_token: "SESS_0000000000000000"}}
-      iex> Gocardless.Client.complete_redirect_flow("RE000099999999999999999999999999", params)
+      iex> Gocardlex.Client.complete_redirect_flow("RE000099999999999999999999999999", params)
       {:ok,
          %{"redirect_flows" => %{"created_at" => "2017-06-26T14:48:26.874Z",
              "description" => nil, "id" => "RE000099999999999999999999999999",

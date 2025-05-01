@@ -1,10 +1,10 @@
-defmodule Gocardless.Behaviour.CustomerBankAccount do
+defmodule Gocardlex.Behaviour.CustomerBankAccount do
   @doc """
   Lists Customer Bank Accounts from GoCardless
 
   ## Examples
 
-      iex> Gocardless.Client.list_customer_bank_accounts
+      iex> Gocardlex.Client.list_customer_bank_accounts
       {:ok,
       %{"customer_bank_accounts" => [%{"account_holder_name" => "FirstName LastName",
             "account_number_ending" => "11", "bank_name" => "BARCLAYS BANK PLC",
@@ -21,7 +21,7 @@ defmodule Gocardless.Behaviour.CustomerBankAccount do
 
   ## Examples
 
-      iex> Gocardless.Client.get_customer_bank_account("BA000999999998")
+      iex> Gocardlex.Client.get_customer_bank_account("BA000999999998")
       {:ok,
       %{"customer_bank_accounts" => %{"account_holder_name" => "FirstName LastName",
           "account_number_ending" => "11", "bank_name" => "BARCLAYS BANK PLC",
@@ -48,7 +48,7 @@ defmodule Gocardless.Behaviour.CustomerBankAccount do
           }
         }
       }
-      iex> Gocardless.Client.create_customer_bank_account(params)
+      iex> Gocardlex.Client.create_customer_bank_account(params)
       {:ok,
       %{"customer_bank_accounts" => %{"account_holder_name" => "FirstName LastName",
           "account_number_ending" => "11", "bank_name" => "BARCLAYS BANK PLC",
@@ -71,7 +71,7 @@ defmodule Gocardless.Behaviour.CustomerBankAccount do
           }
         }
       }
-      iex> Gocardless.Client.update_customer_bank_account("BA000999999998", params)
+      iex> Gocardlex.Client.update_customer_bank_account("BA000999999998", params)
       {:ok,
       %{"customer_bank_accounts" => %{"account_holder_name" => "FirstName LastName",
           "account_number_ending" => "11", "bank_name" => "BARCLAYS BANK PLC",
@@ -86,7 +86,7 @@ defmodule Gocardless.Behaviour.CustomerBankAccount do
 
   ## Examples
 
-      iex> Gocardless.Client.disable_customer_bank_account("BA000999999998")
+      iex> Gocardlex.Client.disable_customer_bank_account("BA000999999998")
       {:ok,
       %{"customer_bank_accounts" => %{"account_holder_name" => "FirstName LastName",
           "account_number_ending" => "11", "bank_name" => "BARCLAYS BANK PLC",

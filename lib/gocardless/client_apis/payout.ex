@@ -1,11 +1,11 @@
-defmodule Gocardless.ClientApi.Payout do
+defmodule Gocardlex.ClientApi.Payout do
   @moduledoc """
   Creates our internal functions for Payouts that link to GenServer calls
   """
   defmacro __using__(_) do
     quote do
-      alias Gocardless.Api.Payout
-      @behaviour Gocardless.Behaviour.Payout
+      alias Gocardlex.Api.Payout
+      @behaviour Gocardlex.Behaviour.Payout
 
       # Payout API
       def list_payouts(params \\ %{}) do

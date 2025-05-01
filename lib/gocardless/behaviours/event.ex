@@ -1,4 +1,4 @@
-defmodule Gocardless.Behaviour.Event do
+defmodule Gocardlex.Behaviour.Event do
   @moduledoc """
   Defines the behaviour for Events, you cannot create or edit Events, only view them.
   """
@@ -7,7 +7,7 @@ defmodule Gocardless.Behaviour.Event do
 
   ## Examples
 
-      iex> Gocardless.Client.list_events
+      iex> Gocardlex.Client.list_events
       {:ok,
        %{"events" => [%{"action" => "created",
             "created_at" => "2017-06-27T14:14:43.390Z",
@@ -25,7 +25,7 @@ defmodule Gocardless.Behaviour.Event do
 
   ## Examples
 
-      iex> Gocardless.Client.get_event("EV000099999999")
+      iex> Gocardlex.Client.get_event("EV000099999999")
       {:ok,
        %{"events" => %{"action" => "created",
            "created_at" => "2017-06-27T10:00:26.278Z",

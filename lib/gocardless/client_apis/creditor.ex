@@ -1,8 +1,8 @@
-defmodule Gocardless.ClientApi.Creditor do
+defmodule Gocardlex.ClientApi.Creditor do
   defmacro __using__(_) do
     quote do
-      alias Gocardless.Api.Creditor
-      @behaviour Gocardless.Behaviour.Creditor
+      alias Gocardlex.Api.Creditor
+      @behaviour Gocardlex.Behaviour.Creditor
 
       # Creditor API
       def list_creditors(params \\ %{}) do

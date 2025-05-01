@@ -1,4 +1,4 @@
-defmodule Gocardless.Behaviour.Customer do
+defmodule Gocardlex.Behaviour.Customer do
   @moduledoc """
   Public API for Gocardless
   """
@@ -7,7 +7,7 @@ defmodule Gocardless.Behaviour.Customer do
   Lists Customers from GoCardless
 
   ## Examples
-      iex> Gocardless.Client.list_customers()
+      iex> Gocardlex.Client.list_customers()
       {:ok,
       %{"customers" => [%{"address_line1" => nil, "address_line2" => nil,
           "address_line3" => nil, "city" => nil, "company_name" => nil,
@@ -25,7 +25,7 @@ defmodule Gocardless.Behaviour.Customer do
           "swedish_identity_number" => nil}],
        "meta" => %{"cursors" => %{"after" => nil, "before" => nil}, "limit" => 50}}}
 
-      iex> Gocardless.Client.list_customers(%{"created_at[gt]" => "2017-06-22T17:18:06.000Z"})
+      iex> Gocardlex.Client.list_customers(%{"created_at[gt]" => "2017-06-22T17:18:06.000Z"})
       {:ok,
        %{"customers" => [%{"address_line1" => nil, "address_line2" => nil,
             "address_line3" => nil, "city" => nil, "company_name" => nil,
@@ -43,7 +43,7 @@ defmodule Gocardless.Behaviour.Customer do
 
   ## Examples
 
-      iex> Gocardless.Client.get_customer("CU000999999998")
+      iex> Gocardlex.Client.get_customer("CU000999999998")
       {:ok,
        %{"customers" => %{"address_line1" => nil, "address_line2" => nil,
            "address_line3" => nil, "city" => nil, "company_name" => nil,
@@ -66,7 +66,7 @@ defmodule Gocardless.Behaviour.Customer do
         family_name: "Lastname",
         country_code: "GB"
       }
-      iex> Gocardless.Client.create_customer(%{customers: params})
+      iex> Gocardlex.Client.create_customer(%{customers: params})
       {:ok,
         %{"customers" => %{"address_line1" => nil, "address_line2" => nil,
            "address_line3" => nil, "city" => nil, "company_name" => nil,
@@ -84,7 +84,7 @@ defmodule Gocardless.Behaviour.Customer do
   ## Examples
 
       iex> params = %{email: "new@email.com"}
-      iex> Gocardless.Client.update_customer("CU000999999998", %{customers: params})
+      iex> Gocardlex.Client.update_customer("CU000999999998", %{customers: params})
       {:ok,
        %{"customers" => %{"address_line1" => nil, "address_line2" => nil,
            "address_line3" => nil, "city" => nil, "company_name" => nil,

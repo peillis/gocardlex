@@ -1,6 +1,6 @@
-defmodule GocardlessTest do
+defmodule GocardlexTest do
   use ExUnit.Case
-  doctest Gocardless
+  doctest Gocardlex
 
   test "the truth" do
     assert 1 + 1 == 2

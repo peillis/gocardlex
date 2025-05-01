@@ -1,8 +1,8 @@
-defmodule Gocardless.ClientApi.Payment do
+defmodule Gocardlex.ClientApi.Payment do
   defmacro __using__(_) do
     quote do
-      alias Gocardless.Api.Payment
-      @behaviour Gocardless.Behaviour.Payment
+      alias Gocardlex.Api.Payment
+      @behaviour Gocardlex.Behaviour.Payment
 
       # Payment API
       def list_payments(params \\ %{}) do

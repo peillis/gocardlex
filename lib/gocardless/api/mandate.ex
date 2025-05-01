@@ -1,5 +1,5 @@
-defmodule Gocardless.Api.Mandate do
-  import Gocardless.Utils.Comms
+defmodule Gocardlex.Api.Mandate do
+  import Gocardlex.Utils.Comms
 
   def list(params \\ %{}) do
     url_params = params |> URI.encode_query

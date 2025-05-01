@@ -3,18 +3,18 @@ defmodule PayoutTest do
 
   test "list_payouts/1 returns response formated as required" do
     prepare_test()
-    {:ok, %{"payouts" => payouts}} = Gocardless.Client.list_payouts
+    {:ok, %{"payouts" => payouts}} = Gocardlex.Client.list_payouts
     assert is_list(payouts)
   end
 
   test "get_payout/1 returns a payout" do
     prepare_test()
 
-    {:ok, %{"payouts" => payouts}} = Gocardless.Client.list_payouts
+    {:ok, %{"payouts" => payouts}} = Gocardlex.Client.list_payouts
 
     {:ok, payout} = Enum.fetch(payouts, -1)
 
-    {:ok, %{"payouts" => retrieved_payout}} = Gocardless.Client.get_payout(payout["id"])
+    {:ok, %{"payouts" => retrieved_payout}} = Gocardlex.Client.get_payout(payout["id"])
 
     assert retrieved_payout["id"] == payout["id"]
   end
@@ -23,7 +23,7 @@ defmodule PayoutTest do
     params = %{
       creditors: %{name: "Test Creditor"}
     }
-    {:ok, %{"creditors" => new_creditor}} = Gocardless.Client.create_creditor(params)
+    {:ok, %{"creditors" => new_creditor}} = Gocardlex.Client.create_creditor(params)
 
     params = %{
       customers: %{
@@ -34,7 +34,7 @@ defmodule PayoutTest do
       }
     }
 
-    {:ok, %{"customers" => new_customer}} = Gocardless.Client.create_customer(params)
+    {:ok, %{"customers" => new_customer}} = Gocardlex.Client.create_customer(params)
 
     params = %{
       customer_bank_accounts: %{
@@ -46,7 +46,7 @@ defmodule PayoutTest do
       }
     }
 
-    {:ok, %{"customer_bank_accounts" => new_customer_bank_account}} = Gocardless.Client.create_customer_bank_account(params)
+    {:ok, %{"customer_bank_accounts" => new_customer_bank_account}} = Gocardlex.Client.create_customer_bank_account(params)
 
     params = %{
       mandates: %{
@@ -54,7 +54,7 @@ defmodule PayoutTest do
         links: %{customer_bank_account: new_customer_bank_account["id"], creditor: new_creditor["id"]}
       }
     }
-    {:ok, %{"mandates" => new_mandate}} = Gocardless.Client.create_mandate(params)
+    {:ok, %{"mandates" => new_mandate}} = Gocardlex.Client.create_mandate(params)
 
     params = %{
       payments: %{
@@ -66,6 +66,6 @@ defmodule PayoutTest do
         }
       }
     }
-    Gocardless.Client.create_payment(params)
+    Gocardlex.Client.create_payment(params)
   end
 end

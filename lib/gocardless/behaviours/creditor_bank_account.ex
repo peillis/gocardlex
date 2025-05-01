@@ -1,10 +1,10 @@
-defmodule Gocardless.Behaviour.CreditorBankAccount do
+defmodule Gocardlex.Behaviour.CreditorBankAccount do
   @moduledoc """
   Lists Creditor Bank Accounts from GoCardless
 
   ## Examples
 
-      iex> Gocardless.Client.list_creditor_bank_accounts
+      iex> Gocardlex.Client.list_creditor_bank_accounts
       {:ok,
         %{"creditor_bank_accounts" => [%{"account_holder_name" => "JOHN DOE",
           "account_number_ending" => "11", "bank_name" => "BARCLAYS BANK PLC",
@@ -20,7 +20,7 @@ defmodule Gocardless.Behaviour.CreditorBankAccount do
 
   ## Examples
 
-      iex> Gocardless.Client.get_creditor_bank_account("BA000999999999")
+      iex> Gocardlex.Client.get_creditor_bank_account("BA000999999999")
       {:ok,
         %{"creditor_bank_accounts" => %{"account_holder_name" => "JOHN DOE",
           "account_number_ending" => "11", "bank_name" => "BARCLAYS BANK PLC",
@@ -47,7 +47,7 @@ defmodule Gocardless.Behaviour.CreditorBankAccount do
           }
         }
       }
-      iex> Gocardless.Client.create_creditor_bank_account("BA000999999999")
+      iex> Gocardlex.Client.create_creditor_bank_account("BA000999999999")
       {:ok,
         %{"creditor_bank_accounts" => %{"account_holder_name" => "JOHN DOE",
           "account_number_ending" => "11", "bank_name" => "BARCLAYS BANK PLC",
@@ -63,7 +63,7 @@ defmodule Gocardless.Behaviour.CreditorBankAccount do
 
   ## Examples
 
-      iex> Gocardless.Client.disable_creditor_bank_account("BA000999999999")
+      iex> Gocardlex.Client.disable_creditor_bank_account("BA000999999999")
       {:ok,
         %{"creditor_bank_accounts" => %{"account_holder_name" => "JOHN DOE",
           "account_number_ending" => "11", "bank_name" => "BARCLAYS BANK PLC",

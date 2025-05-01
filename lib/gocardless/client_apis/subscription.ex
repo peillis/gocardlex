@@ -1,9 +1,9 @@
-defmodule Gocardless.ClientApi.Subscription do
+defmodule Gocardlex.ClientApi.Subscription do
   @moduledoc false
   defmacro __using__(_) do
     quote do
-      alias Gocardless.Api.Subscription
-      @behaviour Gocardless.Behaviour.Subscription
+      alias Gocardlex.Api.Subscription
+      @behaviour Gocardlex.Behaviour.Subscription
 
       # Subscription API
       def list_subscriptions(params \\ %{}) do

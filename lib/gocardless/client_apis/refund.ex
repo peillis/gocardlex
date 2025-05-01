@@ -1,8 +1,8 @@
-defmodule Gocardless.ClientApi.Refund do
+defmodule Gocardlex.ClientApi.Refund do
   defmacro __using__(_) do
     quote do
-      alias Gocardless.Api.Refund
-      @behaviour Gocardless.Behaviour.Refund
+      alias Gocardlex.Api.Refund
+      @behaviour Gocardlex.Behaviour.Refund
 
       # Refund API
       def list_refunds(params \\ %{}) do

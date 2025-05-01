@@ -1,4 +1,4 @@
-defmodule Gocardless.Behaviour.Subscription do
+defmodule Gocardlex.Behaviour.Subscription do
   @moduledoc """
   Defines the behaviour for Subscriptions
   """
@@ -7,7 +7,7 @@ defmodule Gocardless.Behaviour.Subscription do
 
   ## Examples
 
-      iex> Gocardless.Client.list_subscriptions
+      iex> Gocardlex.Client.list_subscriptions
       {:ok,
        %{"meta" => %{"cursors" => %{"after" => nil, "before" => nil}, "limit" => 50},
          "subscriptions" => [%{"amount" => 2500,
@@ -37,7 +37,7 @@ defmodule Gocardless.Behaviour.Subscription do
 
   ## Examples
 
-      iex> Gocardless.Client.get_subscription("SB000999999998")
+      iex> Gocardlex.Client.get_subscription("SB000999999998")
       {:ok,
        %{"subscriptions" => %{"amount" => 2500,
            "created_at" => "2017-06-26T11:03:27.037Z", "currency" => "GBP",
@@ -80,7 +80,7 @@ defmodule Gocardless.Behaviour.Subscription do
           }
         }
       }
-      iex> Gocardless.Client.create_subscription(params)
+      iex> Gocardlex.Client.create_subscription(params)
       {:ok,
        %{"subscriptions" => %{"amount" => 2500,
            "created_at" => "2017-06-26T11:03:27.037Z", "currency" => "GBP",
@@ -113,7 +113,7 @@ defmodule Gocardless.Behaviour.Subscription do
           name: "Updated Name"
         }
       }
-      iex> Gocardless.Client.update_subscription("SB000999999998", params)
+      iex> Gocardlex.Client.update_subscription("SB000999999998", params)
       {:ok,
        %{"subscriptions" => %{"amount" => 2500,
            "created_at" => "2017-06-26T11:03:27.037Z", "currency" => "GBP",
@@ -140,7 +140,7 @@ defmodule Gocardless.Behaviour.Subscription do
 
   ## Examples
 
-      iex> Gocardless.Client.cancel_subscription("SB000999999998")
+      iex> Gocardlex.Client.cancel_subscription("SB000999999998")
       {:ok,
        %{"subscriptions" => %{"amount" => 2500,
            "created_at" => "2017-06-26T11:03:27.037Z", "currency" => "GBP",

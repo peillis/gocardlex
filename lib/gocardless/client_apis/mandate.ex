@@ -1,8 +1,8 @@
-defmodule Gocardless.ClientApi.Mandate do
+defmodule Gocardlex.ClientApi.Mandate do
   defmacro __using__(_) do
     quote do
-      alias Gocardless.Api.Mandate
-      @behaviour Gocardless.Behaviour.Mandate
+      alias Gocardlex.Api.Mandate
+      @behaviour Gocardlex.Behaviour.Mandate
 
       # Mandate API
       def list_mandates(params \\ %{}) do
