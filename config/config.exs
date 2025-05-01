@@ -1,8 +1,11 @@
 # This file is responsible for configuring your application
 # and its dependencies with the aid of the Mix.Config module.
-use Mix.Config
+import Config
 
-import_config "secret.exs"
+config :gocardless,
+  api_base: "https://api-sandbox.gocardless.com/",
+  api_version: "2015-07-06",
+  access_token: ""
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this

@@ -3,10 +3,10 @@ defmodule Gocardless.Mixfile do
 
   def project do
     [app: :gocardless,
-     version: "1.0.3",
+     version: "1.0.4",
      description: "Elixir wrapper for the GoCardless API",
      package: package(),
-     elixir: "~> 1.4",
+     elixir: "~> 1.15",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]
@@ -17,7 +17,7 @@ defmodule Gocardless.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger, :httpotion],
+    [extra_applications: [:logger],
      mod: {Gocardless, []}]
   end
 
@@ -31,10 +31,10 @@ defmodule Gocardless.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:ex_doc, "~> 0.14", only: :dev},
-     {:httpotion, "~> 3.0.3"},
-     {:poison, "~> 3.0"},
-     {:credo, "~> 0.8", only: [:dev, :test], runtime: false}]
+    [{:ex_doc, "~> 0.37", only: :dev},
+     {:jason, "~> 1.4"},
+     {:tesla, "~> 1.14"},
+     {:credo, "~> 1.7", only: [:dev, :test], runtime: false}]
   end
 
   defp package do
