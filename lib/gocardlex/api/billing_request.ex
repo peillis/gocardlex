@@ -6,11 +6,15 @@ defmodule Gocardlex.Api.BillingRequest do
   end
 
   def collect_customer_details(billing_request_id, body) do
-    request(:post, "/billing_requests/#{billing_request_id}/actions/collect_customer_details", body)
+    request(
+      :post,
+      "/billing_requests/#{billing_request_id}/actions/collect_customer_details",
+      body
+    )
   end
 
-  def collect_bank_account_details(billing_request_id, body) do
-    request(:post, "/billing_requests/#{billing_request_id}/actions/collect_bank_account_details", body)
+  def collect_bank_account(billing_request_id, body) do
+    request(:post, "/billing_requests/#{billing_request_id}/actions/collect_bank_account", body)
   end
 
   def confirm_payer_details(billing_request_id, body) do
