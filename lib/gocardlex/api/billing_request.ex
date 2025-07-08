@@ -21,8 +21,8 @@ defmodule Gocardlex.Api.BillingRequest do
     request(:post, "/billing_requests/#{billing_request_id}/actions/confirm_payer_details", body)
   end
 
-  def fulfill(billing_request_id, body) do
-    request(:post, "/billing_requests/#{billing_request_id}/actions/fulfill", body)
+  def fulfil(billing_request_id, body) do
+    request(:post, "/billing_requests/#{billing_request_id}/actions/fulfil", body)
   end
 
   def cancel(billing_request_id, body) do
