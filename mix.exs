@@ -4,7 +4,7 @@ defmodule Gocardlex.Mixfile do
   def project do
     [
       app: :gocardlex,
-      version: "1.0.4",
+      version: "1.1.0",
       package: package(),
       elixir: "~> 1.15",
       build_embedded: Mix.env == :prod,
