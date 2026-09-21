@@ -1,4 +1,6 @@
 defmodule Gocardlex.Utils.Comms do
+  @moduledoc "Handles authenticated HTTP communication with the GoCardless API."
+
   @api_base Application.compile_env!(:gocardlex, :api_base)
   @api_version Application.compile_env!(:gocardlex, :api_version)
   @access_token Application.compile_env!(:gocardlex, :access_token)
@@ -37,7 +39,7 @@ defmodule Gocardlex.Utils.Comms do
     String.trim_trailing(@api_base, "/") <> url
   end
 
-  defp client() do
+  defp client do
     [
       auth: {:bearer, @access_token},
       headers: [

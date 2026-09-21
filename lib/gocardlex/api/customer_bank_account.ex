@@ -1,8 +1,10 @@
 defmodule Gocardlex.Api.CustomerBankAccount do
+  @moduledoc "Maps client operations to GoCardless Customer Bank Account API endpoints."
+
   import Gocardlex.Utils.Comms
 
   def list(params) do
-    url_params = params |> URI.encode_query
+    url_params = params |> URI.encode_query()
 
     request(:get, "/customer_bank_accounts?#{url_params}")
   end

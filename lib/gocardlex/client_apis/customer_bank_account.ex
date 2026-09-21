@@ -1,4 +1,6 @@
 defmodule Gocardlex.ClientApi.CustomerBankAccount do
+  @moduledoc "Defines client functions and GenServer callbacks for customer bank accounts."
+
   defmacro __using__(_) do
     quote do
       alias Gocardlex.Api.CustomerBankAccount
@@ -12,13 +14,16 @@ defmodule Gocardlex.ClientApi.CustomerBankAccount do
       def get_customer_bank_account(customer_bank_account_id) do
         GenServer.call(@client_name, {:get_customer_bank_account, customer_bank_account_id})
       end
-      
+
       def create_customer_bank_account(params) do
         GenServer.call(@client_name, {:create_customer_bank_account, params})
       end
-      
+
       def update_customer_bank_account(customer_bank_account_id, params) do
-        GenServer.call(@client_name, {:update_customer_bank_account, customer_bank_account_id, params})
+        GenServer.call(
+          @client_name,
+          {:update_customer_bank_account, customer_bank_account_id, params}
+        )
       end
 
       def disable_customer_bank_account(customer_bank_account_id) do
@@ -38,7 +43,11 @@ defmodule Gocardlex.ClientApi.CustomerBankAccount do
         {:reply, CustomerBankAccount.create(params), state}
       end
 
-      def handle_call({:update_customer_bank_account, customer_bank_account_id, params}, _from, state) do
+      def handle_call(
+            {:update_customer_bank_account, customer_bank_account_id, params},
+            _from,
+            state
+          ) do
         {:reply, CustomerBankAccount.update(customer_bank_account_id, params), state}
       end
 

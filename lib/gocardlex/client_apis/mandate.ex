@@ -1,4 +1,6 @@
 defmodule Gocardlex.ClientApi.Mandate do
+  @moduledoc "Defines client functions and GenServer callbacks for mandate operations."
+
   defmacro __using__(_) do
     quote do
       alias Gocardlex.Api.Mandate

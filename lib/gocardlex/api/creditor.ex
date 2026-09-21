@@ -1,8 +1,10 @@
 defmodule Gocardlex.Api.Creditor do
+  @moduledoc "Maps client operations to GoCardless Creditor API endpoints."
+
   import Gocardlex.Utils.Comms
 
   def list(params \\ %{}) do
-    url_params = params |> URI.encode_query
+    url_params = params |> URI.encode_query()
 
     request(:get, "/creditors?#{url_params}")
   end

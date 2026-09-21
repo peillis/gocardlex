@@ -1,4 +1,6 @@
 defmodule Gocardlex.Api.BillingRequest do
+  @moduledoc "Maps client operations to GoCardless Billing Request API endpoints."
+
   import Gocardlex.Utils.Comms
 
   def create(body) do

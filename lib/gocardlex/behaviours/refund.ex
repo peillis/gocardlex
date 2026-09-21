@@ -1,4 +1,6 @@
 defmodule Gocardlex.Behaviour.Refund do
+  @moduledoc "Defines the public callbacks for refund operations."
+
   @doc """
   Lists Refunds from GoCardless
 
@@ -26,7 +28,7 @@ defmodule Gocardlex.Behaviour.Refund do
            "links" => %{"payment" => "PM000999999998"}, "metadata" => %{},
            "reference" => "partial refund"}}}
   """
-  @callback get_refund(String.t) :: tuple()
+  @callback get_refund(String.t()) :: tuple()
 
   @doc """
   Creates a new Refund
@@ -72,5 +74,5 @@ defmodule Gocardlex.Behaviour.Refund do
            "links" => %{"payment" => "PM000999999998"},
            "metadata" => %{"db_id" => "1234"}, "reference" => "partial refund"}}}
   """
-  @callback update_refund(String.t, map()) :: tuple()
+  @callback update_refund(String.t(), map()) :: tuple()
 end

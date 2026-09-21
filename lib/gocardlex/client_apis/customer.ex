@@ -1,4 +1,6 @@
 defmodule Gocardlex.ClientApi.Customer do
+  @moduledoc "Defines client functions and GenServer callbacks for customer operations."
+
   defmacro __using__(_) do
     quote do
       alias Gocardlex.Api.Customer
