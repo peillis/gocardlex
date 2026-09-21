@@ -41,14 +41,15 @@ defmodule Gocardlex.Utils.Comms do
     Tesla.client([
       {Tesla.Middleware.BaseUrl, @api_base},
       {Tesla.Middleware.BearerAuth, token: @access_token},
-      {Tesla.Middleware.Headers, [
-        {"user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
-        {"authorization", "Bearer #{@access_token}"},
-        {"gocardless-version", @api_version},
-        {"accepts", "application/json"},
-        {"content-type", "application/json"}
-      ]},
-      Tesla.Middleware.JSON
+      {Tesla.Middleware.Headers,
+       [
+         {"user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
+         {"authorization", "Bearer #{@access_token}"},
+         {"gocardless-version", @api_version},
+         {"accepts", "application/json"},
+         {"content-type", "application/json"}
+       ]},
+      {Tesla.Middleware.JSON, engine: JSON}
     ])
   end
 end
