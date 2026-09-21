@@ -1,4 +1,6 @@
 defmodule Gocardlex.ClientApi.Creditor do
+  @moduledoc "Defines client functions and GenServer callbacks for creditor operations."
+
   defmacro __using__(_) do
     quote do
       alias Gocardlex.Api.Creditor

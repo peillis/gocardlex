@@ -1,4 +1,6 @@
 defmodule Gocardlex.Behaviour.CustomerBankAccount do
+  @moduledoc "Defines the public callbacks for customer bank account operations."
+
   @doc """
   Lists Customer Bank Accounts from GoCardless
 
@@ -14,8 +16,8 @@ defmodule Gocardlex.Behaviour.CustomerBankAccount do
             "metadata" => %{"account_holder_name" => "FirstName LastName"}}],
         "meta" => %{"cursors" => %{"after" => nil, "before" => nil}, "limit" => 50}}}
   """
-  @callback list_customer_bank_accounts(map()) :: tuple()  
-  
+  @callback list_customer_bank_accounts(map()) :: tuple()
+
   @doc """
   Gets a Customer Bank Account based on their ID in GoCardless
 
@@ -30,7 +32,7 @@ defmodule Gocardlex.Behaviour.CustomerBankAccount do
           "links" => %{"customer" => "CU000999999998"},
           "metadata" => %{"account_holder_name" => "FirstName LastName"}}}}
   """
-  @callback get_customer_bank_account(String.t) :: tuple()
+  @callback get_customer_bank_account(String.t()) :: tuple()
 
   @doc """
   Creates a new Customer Bank Account
@@ -80,7 +82,7 @@ defmodule Gocardlex.Behaviour.CustomerBankAccount do
           "links" => %{"customer" => "CU000999999998"},
           "metadata" => %{"db_id" => "1234"}}}}
   """
-  @callback update_customer_bank_account(String.t, map()) :: tuple()
+  @callback update_customer_bank_account(String.t(), map()) :: tuple()
 
   @doc """
 
@@ -95,5 +97,5 @@ defmodule Gocardlex.Behaviour.CustomerBankAccount do
           "links" => %{"customer" => "CU000999999998"},
           "metadata" => %{}}}}
   """
-  @callback disable_customer_bank_account(String.t) :: tuple()
+  @callback disable_customer_bank_account(String.t()) :: tuple()
 end

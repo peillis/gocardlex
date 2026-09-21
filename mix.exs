@@ -4,11 +4,11 @@ defmodule Gocardlex.Mixfile do
   def project do
     [
       app: :gocardlex,
-      version: "1.1.0",
+      version: "2.0.0-rc.1",
       package: package(),
-      elixir: "~> 1.15",
-      build_embedded: Mix.env == :prod,
-      start_permanent: Mix.env == :prod,
+      elixir: "~> 1.18",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
   end
@@ -35,9 +35,9 @@ defmodule Gocardlex.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:ex_doc, "~> 0.37", only: :dev},
-      {:jason, "~> 1.4"},
-      {:tesla, "~> 1.14"},
+      {:ex_doc, "~> 0.40", only: :dev},
+      {:req, "~> 0.8.0-rc.0"},
+      {:plug, "~> 1.0", only: :test},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end

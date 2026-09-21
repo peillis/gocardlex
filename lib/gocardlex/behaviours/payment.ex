@@ -1,4 +1,6 @@
 defmodule Gocardlex.Behaviour.Payment do
+  @moduledoc "Defines the public callbacks for payment operations."
+
   @doc """
   Lists all payments
 
@@ -40,7 +42,7 @@ defmodule Gocardlex.Behaviour.Payment do
             "mandate" => "MD000099999999"}, "metadata" => %{}, "reference" => nil,
           "status" => "pending_submission"}}}
   """
-  @callback get_payment(String.t) :: tuple()
+  @callback get_payment(String.t()) :: tuple()
 
   @doc """
   Creates a new Payment
@@ -89,7 +91,7 @@ defmodule Gocardlex.Behaviour.Payment do
             "mandate" => "MD000099999999"}, "metadata" => %{"db_id" => "1234"},
           "reference" => nil, "status" => "pending_submission"}}}
   """
-  @callback update_payment(String.t, map()) :: tuple()
+  @callback update_payment(String.t(), map()) :: tuple()
 
   @doc """
   Cancels the payment if it has not already been
@@ -107,7 +109,7 @@ defmodule Gocardlex.Behaviour.Payment do
           "reference" => nil, "status" => "cancelled"}}}
 
   """
-  @callback cancel_payment(String.t, map()) :: tuple()
+  @callback cancel_payment(String.t(), map()) :: tuple()
 
   @doc """
   Retries a failed payment if the underlying mandate
@@ -117,5 +119,5 @@ defmodule Gocardlex.Behaviour.Payment do
 
       iex> Gocardlex.Client.retry_payment("PM000099999999")
   """
-  @callback retry_payment(String.t, map()) :: tuple()
+  @callback retry_payment(String.t(), map()) :: tuple()
 end

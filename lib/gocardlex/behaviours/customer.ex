@@ -53,7 +53,7 @@ defmodule Gocardlex.Behaviour.Customer do
            "metadata" => %{}, "postal_code" => nil, "region" => nil,
            "swedish_identity_number" => nil}}}
   """
-  @callback get_customer(String.t) :: tuple()
+  @callback get_customer(String.t()) :: tuple()
 
   @doc """
   Creates a new Customer
@@ -95,5 +95,5 @@ defmodule Gocardlex.Behaviour.Customer do
            "swedish_identity_number" => nil}}}
 
   """
-  @callback update_customer(String.t, map()) :: tuple()
+  @callback update_customer(String.t(), map()) :: tuple()
 end

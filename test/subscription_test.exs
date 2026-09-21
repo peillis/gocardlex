@@ -1,123 +1,66 @@
 defmodule SubscriptionTest do
-  use ExUnit.Case
+  use Gocardlex.ApiCase
 
-  test "list_subscriptions returns response formated as required" do
-    {:ok, %{"subscriptions" => subscriptions}} = Gocardlex.Client.list_subscriptions
-    assert is_list(subscriptions)
+  test "list_subscriptions returns subscriptions" do
+    subscriptions = [%{"id" => "SB123"}]
+    expect_request(:get, "/subscriptions", %{"subscriptions" => subscriptions})
+
+    assert {:ok, %{"subscriptions" => ^subscriptions}} =
+             Gocardlex.Client.list_subscriptions()
   end
 
   test "create_subscription creates a subscription" do
-    new_mandate = prepare_mandate()
-
     params = %{
       subscriptions: %{
         amount: "2500",
         currency: "GBP",
         name: "Test Subscription",
         interval_unit: "monthly",
-        day_of_month:  "1",
-        links: %{mandate: new_mandate["id"]}
+        day_of_month: "1",
+        links: %{mandate: "MD123"}
       }
     }
 
-    {:ok, %{"subscriptions" => new_subscription}} = Gocardlex.Client.create_subscription(params)
-    assert new_subscription["name"] == "Test Subscription"
+    subscription = %{"id" => "SB123", "name" => "Test Subscription"}
+
+    expect_request(:post, "/subscriptions", %{"subscriptions" => subscription},
+      body: params,
+      status: 201
+    )
+
+    assert {:ok, %{"subscriptions" => ^subscription}} =
+             Gocardlex.Client.create_subscription(params)
   end
 
   test "update_subscription updates a subscription" do
-    new_mandate = prepare_mandate()
+    params = %{subscriptions: %{name: "Updated subscription"}}
+    subscription = %{"id" => "SB123", "name" => "Updated subscription"}
 
-    params = %{
-      subscriptions: %{
-        amount: "2500",
-        currency: "GBP",
-        name: "Test Subscription",
-        interval_unit: "monthly",
-        day_of_month:  "1",
-        links: %{mandate: new_mandate["id"]}
-      }
-    }
+    expect_request(:put, "/subscriptions/SB123", %{"subscriptions" => subscription}, body: params)
 
-    {:ok, %{"subscriptions" => new_subscription}} = Gocardlex.Client.create_subscription(params)
-    params = %{
-      subscriptions: %{name: "Updated subscription"}
-    }
-
-    {:ok, %{"subscriptions" => updated_subscription}} = Gocardlex.Client.update_subscription(new_subscription["id"], params)
-
-    assert updated_subscription["name"] == "Updated subscription"
+    assert {:ok, %{"subscriptions" => ^subscription}} =
+             Gocardlex.Client.update_subscription("SB123", params)
   end
 
-  test "get_subscription returns a subscription" do
-    subscription_id = get_last_subscription_id()
-    {:ok, %{"subscriptions" => subscription}} = Gocardlex.Client.get_subscription(subscription_id)
-    assert subscription["id"] == subscription_id
+  test "get_subscription retrieves a subscription" do
+    subscription = %{"id" => "SB123"}
+    expect_request(:get, "/subscriptions/SB123", %{"subscriptions" => subscription})
+
+    assert {:ok, %{"subscriptions" => ^subscription}} =
+             Gocardlex.Client.get_subscription("SB123")
   end
 
   test "cancel_subscription cancels a subscription" do
-    new_mandate = prepare_mandate()
+    subscription = %{"id" => "SB123", "status" => "cancelled"}
 
-    params = %{
-      subscriptions: %{
-        amount: "2500",
-        currency: "GBP",
-        name: "Test Subscription",
-        interval_unit: "monthly",
-        day_of_month:  "1",
-        links: %{mandate: new_mandate["id"]}
-      }
-    }
+    expect_request(
+      :post,
+      "/subscriptions/SB123/actions/cancel",
+      %{"subscriptions" => subscription},
+      body: %{}
+    )
 
-    {:ok, %{"subscriptions" => new_subscription}} = Gocardlex.Client.create_subscription(params)
-    {:ok, %{"subscriptions" => cancelled_subscription}} = Gocardlex.Client.cancel_subscription(new_subscription["id"])
-
-    assert cancelled_subscription["status"] == "cancelled"
-  end
-
-  defp get_last_subscription_id do
-    {:ok, %{"subscriptions" => subscriptions}} = Gocardlex.Client.list_subscriptions(%{limit: 1})
-
-    {:ok, subscription} = Enum.fetch(subscriptions, -1)
-
-    subscription["id"]
-  end
-
-  defp prepare_mandate do
-    params = %{
-      creditors: %{name: "Test Creditor"}
-    }
-    {:ok, %{"creditors" => new_creditor}} = Gocardlex.Client.create_creditor(params)
-
-    params = %{
-      customers: %{
-        email: "name@email.com",
-        given_name: "Firstname",
-        family_name: "Lastname",
-        country_code: "GB"
-      }
-    }
-
-    {:ok, %{"customers" => new_customer}} = Gocardlex.Client.create_customer(params)
-
-    params = %{
-      customer_bank_accounts: %{
-        account_holder_name: "FirstName LastName",
-        account_number: "55779911",
-        branch_code: "200000",
-        country_code: "GB",
-        links: %{customer: new_customer["id"]}
-      }
-    }
-
-    {:ok, %{"customer_bank_accounts" => new_customer_bank_account}} = Gocardlex.Client.create_customer_bank_account(params)
-
-    params = %{
-      mandates: %{
-        scheme: "bacs",
-        links: %{customer_bank_account: new_customer_bank_account["id"], creditor: new_creditor["id"]}
-      }
-    }
-    {:ok, %{"mandates" => new_mandate}} = Gocardlex.Client.create_mandate(params)
-    new_mandate
+    assert {:ok, %{"subscriptions" => ^subscription}} =
+             Gocardlex.Client.cancel_subscription("SB123")
   end
 end

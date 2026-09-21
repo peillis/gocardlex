@@ -1,4 +1,6 @@
 defmodule Gocardlex.Utils.Comms do
+  @moduledoc "Handles authenticated HTTP communication with the GoCardless API."
+
   @api_base Application.compile_env!(:gocardlex, :api_base)
   @api_version Application.compile_env!(:gocardlex, :api_version)
   @access_token Application.compile_env!(:gocardlex, :access_token)
@@ -6,21 +8,21 @@ defmodule Gocardlex.Utils.Comms do
   def request(:get, path) do
     path
     |> api_url
-    |> then(&Tesla.get(client(), &1))
+    |> then(&Req.get(client(), url: &1))
     |> get_response
   end
 
   def request(:post, path, body) do
     path
     |> api_url
-    |> then(&Tesla.post(client(), &1, body))
+    |> then(&Req.post(client(), url: &1, json: body))
     |> get_response
   end
 
   def request(:put, path, body) do
     path
     |> api_url
-    |> then(&Tesla.put(client(), &1, body))
+    |> then(&Req.put(client(), url: &1, json: body))
     |> get_response
   end
 
@@ -34,21 +36,18 @@ defmodule Gocardlex.Utils.Comms do
   defp get_response({:error, err}), do: {:error, err}
 
   defp api_url(url) do
-    @api_base <> url
+    String.trim_trailing(@api_base, "/") <> url
   end
 
-  defp client() do
-    Tesla.client([
-      {Tesla.Middleware.BaseUrl, @api_base},
-      {Tesla.Middleware.BearerAuth, token: @access_token},
-      {Tesla.Middleware.Headers, [
-        {"user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
-        {"authorization", "Bearer #{@access_token}"},
+  defp client do
+    [
+      auth: {:bearer, @access_token},
+      headers: [
         {"gocardless-version", @api_version},
-        {"accepts", "application/json"},
-        {"content-type", "application/json"}
-      ]},
-      Tesla.Middleware.JSON
-    ])
+        {"accept", "application/json"}
+      ]
+    ]
+    |> Keyword.merge(Application.get_env(:gocardlex, :req_options, []))
+    |> Req.new()
   end
 end
