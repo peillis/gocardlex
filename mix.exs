@@ -36,7 +36,7 @@ defmodule Gocardlex.Mixfile do
   defp deps do
     [
       {:ex_doc, "~> 0.37", only: :dev},
-      {:tesla, "~> 1.14"},
+      {:req, "~> 0.8.0-rc.0"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end

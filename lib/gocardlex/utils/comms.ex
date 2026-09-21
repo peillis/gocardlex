@@ -6,21 +6,21 @@ defmodule Gocardlex.Utils.Comms do
   def request(:get, path) do
     path
     |> api_url
-    |> then(&Tesla.get(client(), &1))
+    |> then(&Req.get(client(), url: &1))
     |> get_response
   end
 
   def request(:post, path, body) do
     path
     |> api_url
-    |> then(&Tesla.post(client(), &1, body))
+    |> then(&Req.post(client(), url: &1, json: body))
     |> get_response
   end
 
   def request(:put, path, body) do
     path
     |> api_url
-    |> then(&Tesla.put(client(), &1, body))
+    |> then(&Req.put(client(), url: &1, json: body))
     |> get_response
   end
 
@@ -38,18 +38,12 @@ defmodule Gocardlex.Utils.Comms do
   end
 
   defp client() do
-    Tesla.client([
-      {Tesla.Middleware.BaseUrl, @api_base},
-      {Tesla.Middleware.BearerAuth, token: @access_token},
-      {Tesla.Middleware.Headers,
-       [
-         {"user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
-         {"authorization", "Bearer #{@access_token}"},
-         {"gocardless-version", @api_version},
-         {"accepts", "application/json"},
-         {"content-type", "application/json"}
-       ]},
-      {Tesla.Middleware.JSON, engine: JSON}
-    ])
+    Req.new(
+      auth: {:bearer, @access_token},
+      headers: [
+        {"gocardless-version", @api_version},
+        {"accept", "application/json"}
+      ]
+    )
   end
 end
