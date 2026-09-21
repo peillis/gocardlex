@@ -1,53 +1,57 @@
 defmodule CreditorBankAccountTest do
-  use ExUnit.Case
+  use Gocardlex.ApiCase
 
-  test "list_creditor_bank_accounts returns response formated as required" do
-    {:ok, %{"creditor_bank_accounts" => creditor_ba}} = Gocardlex.Client.list_creditor_bank_accounts
-    assert is_list(creditor_ba)
+  test "list_creditor_bank_accounts returns bank accounts" do
+    accounts = [%{"id" => "BA123", "enabled" => true}]
+    expect_request(:get, "/creditor_bank_accounts", %{"creditor_bank_accounts" => accounts})
+
+    assert {:ok, %{"creditor_bank_accounts" => ^accounts}} =
+             Gocardlex.Client.list_creditor_bank_accounts()
   end
 
-  test "create_creditor_bank_account creates a creditor bank account" do
-    {:ok, %{"creditor_bank_accounts" => new_creditor_ba}} = create_creditor_bank_account()
-
-    {:ok, %{"creditor_bank_accounts" => creditor}} =
-      Gocardlex.Client.get_creditor_bank_account(new_creditor_ba["id"])
-
-    assert creditor["account_holder_name"] == "JOHN DOE"
-  end
-
-  test "disable_creditor_bank_account disables a creditor bank account" do
-    {:ok, %{"creditor_bank_accounts" => new_creditor_ba}} = create_creditor_bank_account()
-
-    Gocardlex.Client.disable_creditor_bank_account(new_creditor_ba["id"])
-
-    {:ok, %{"creditor_bank_accounts" => creditor_bank_account}} =
-      Gocardlex.Client.get_creditor_bank_account(new_creditor_ba["id"])
-
-    assert creditor_bank_account["enabled"] == false
-  end
-
-  defp create_creditor_bank_account do
-    creditor_params = %{
-      creditors: %{
-        name: "Test Creditor"
-      }
-    }
-
-    {:ok, %{"creditors" => new_creditor}} =
-      Gocardlex.Client.create_creditor(creditor_params)
-
-    creditor_ba_params = %{
+  test "create_creditor_bank_account creates an account that can be retrieved" do
+    params = %{
       creditor_bank_accounts: %{
         account_holder_name: "John Doe",
         account_number: "55779911",
         branch_code: "200000",
         country_code: "GB",
-        links: %{
-          creditor: new_creditor["id"]
-        }
+        links: %{creditor: "CR123"}
       }
     }
 
-    Gocardlex.Client.create_creditor_bank_account(creditor_ba_params)
+    account = %{"id" => "BA123", "account_holder_name" => "JOHN DOE", "enabled" => true}
+
+    expect_request(
+      :post,
+      "/creditor_bank_accounts",
+      %{"creditor_bank_accounts" => account},
+      body: params,
+      status: 201
+    )
+
+    expect_request(:get, "/creditor_bank_accounts/BA123", %{
+      "creditor_bank_accounts" => account
+    })
+
+    assert {:ok, %{"creditor_bank_accounts" => ^account}} =
+             Gocardlex.Client.create_creditor_bank_account(params)
+
+    assert {:ok, %{"creditor_bank_accounts" => ^account}} =
+             Gocardlex.Client.get_creditor_bank_account("BA123")
+  end
+
+  test "disable_creditor_bank_account disables an account" do
+    account = %{"id" => "BA123", "enabled" => false}
+
+    expect_request(
+      :post,
+      "/creditor_bank_accounts/BA123/actions/disable",
+      %{"creditor_bank_accounts" => account},
+      body: %{}
+    )
+
+    assert {:ok, %{"creditor_bank_accounts" => ^account}} =
+             Gocardlex.Client.disable_creditor_bank_account("BA123")
   end
 end

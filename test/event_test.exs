@@ -1,28 +1,17 @@
 defmodule EventTest do
-  use ExUnit.Case
+  use Gocardlex.ApiCase
 
-  test "list_events/1 returns response formated as required" do
-    prepare_test()
-    {:ok, %{"events" => events}} = Gocardlex.Client.list_events
-    assert is_list(events)
+  test "list_events returns events" do
+    events = [%{"id" => "EV123"}]
+    expect_request(:get, "/events", %{"events" => events})
+
+    assert {:ok, %{"events" => ^events}} = Gocardlex.Client.list_events()
   end
 
-  test "get_event/1 returns a event" do
-    prepare_test()
+  test "get_event retrieves an event" do
+    event = %{"id" => "EV123"}
+    expect_request(:get, "/events/EV123", %{"events" => event})
 
-    {:ok, %{"events" => events}} = Gocardlex.Client.list_events
-
-    {:ok, event} = Enum.fetch(events, -1)
-
-    {:ok, %{"events" => retrieved_event}} = Gocardlex.Client.get_event(event["id"])
-
-    assert retrieved_event["id"] == event["id"]
-  end
-
-  defp prepare_test do
-    params = %{
-      creditors: %{name: "Test Creditor"}
-    }
-    Gocardlex.Client.create_creditor(params)
+    assert {:ok, %{"events" => ^event}} = Gocardlex.Client.get_event("EV123")
   end
 end

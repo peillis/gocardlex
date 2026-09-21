@@ -34,16 +34,18 @@ defmodule Gocardlex.Utils.Comms do
   defp get_response({:error, err}), do: {:error, err}
 
   defp api_url(url) do
-    @api_base <> url
+    String.trim_trailing(@api_base, "/") <> url
   end
 
   defp client() do
-    Req.new(
+    [
       auth: {:bearer, @access_token},
       headers: [
         {"gocardless-version", @api_version},
         {"accept", "application/json"}
       ]
-    )
+    ]
+    |> Keyword.merge(Application.get_env(:gocardlex, :req_options, []))
+    |> Req.new()
   end
 end
